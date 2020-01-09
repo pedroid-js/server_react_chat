@@ -18,8 +18,6 @@ const io = require("socket.io")(server)
 //Middleware
 app.use(cors())
 
-let users: string[] = []
-
 io.on("connection", (socket: any) => {
     console.log("We have a new connection")
 
@@ -34,8 +32,6 @@ io.on("connection", (socket: any) => {
             if (error) return callback(error)
 
             socket.join(user.room)
-
-            users[socket.id] = name
             socket.emit('message', { user: 'admin', text: `${user.name}, welcome to the room ${user.room}` })
             socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name}, has joined!` })
 
@@ -45,7 +41,7 @@ io.on("connection", (socket: any) => {
         } catch {
             return callback("There was an error")
         }
-    })sadasda
+    })
 
     socket.on('sendMessage', (message: string, name: string, callback: Function) => {
         try {
