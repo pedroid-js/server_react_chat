@@ -45,7 +45,7 @@ io.on("connection", (socket: any) => {
         } catch {
             return callback("There was an error")
         }
-    })
+    })sadasda
 
     socket.on('sendMessage', (message: string, name: string, callback: Function) => {
         try {
